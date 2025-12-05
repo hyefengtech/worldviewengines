@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WORLDPLAY ENGINE CITIES | WORLDPLAY</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .page-enter {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .page-enter-active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .engine-chip-active {
+      box-shadow: 0 0 18px rgba(129,140,248,0.55);
+    }
+
+    /* SVG 맵 인터랙션 */
+    .map-region {
+      cursor: pointer;
+      transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+      opacity: 0.9;
+    }
+    .map-region:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 8px rgba(129, 140, 248, 0.7));
+      opacity: 1;
+    }
+    .map-region-active {
+      filter: drop-shadow(0 0 12px rgba(244, 244, 255, 0.9));
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-[#050515] via-[#050820] to-[#020014] text-gray-100 min-h-screen">
+
+  <!-- WRAPPER -->
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16">
+
+    <!-- HEADER -->
+    <header class="text-center mb-8 sm:mb-10">
+      <p class="text-xs tracking-[0.35em] text-indigo-400 mb-3 uppercase">
+        WORLDPLAY · WORLDVIEW ENGINE
+      </p>
+      <h1 class="text-3xl sm:text-4xl font-bold text-indigo-100 drop-shadow mb-4">
+        4 엔진 도시 WORLD MAP
+      </h1>
+      <p class="text-sm sm:text-base text-indigo-200/80 leading-relaxed max-w-2xl mx-auto">
+        각 엔진은 하나의 <span class="text-indigo-300 font-semibold">도시</span>로 구현돼<br>
+        네 세계관 코어가 어디에 가까운지, 어떤 도시에서 플레이를 시작하고 싶은지 느껴봐
+      </p>
+    </header>
+
+    <!-- 🌍 SVG 인터랙티브 월드맵 -->
+    <section class="mb-8 sm:mb-10">
+      <div class="bg-slate-950/60 border border-slate-700/70 rounded-3xl p-4 sm:p-6 shadow-lg">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+          <div class="text-xs sm:text-sm text-indigo-200/80">
+            <span class="font-semibold text-indigo-300">WORLDPLAY CITY MAP</span><br/>
+            지도를 눌러 엔진 도시를 선택해<br> 각 도시가 너의 플레이 성향과 연결돼
+          </div>
+          <div class="text-[0.65rem] sm:text-xs text-indigo-300/70">
+            ◆ ORDER · ✦ CREATION · ❖ MEANING · ▲ IMPACT
+          </div>
+        </div>
+
+        <!-- SVG MAP -->
+        <div class="w-full max-w-xl mx-auto">
+          <svg viewBox="0 0 400 400" class="w-full">
+            <!-- 중앙 코어 -->
+            <g>
+              <circle cx="200" cy="200" r="46" fill="#020617" stroke="#4C6FFF" stroke-width="1.5" />
+              <circle cx="200" cy="200" r="42" fill="url(#coreGradient)" />
+              <text x="200" y="196" text-anchor="middle" fill="#E5E7EB" font-size="13" font-weight="600">
+                WORLDPLAY
+              </text>
+              <text x="200" y="214" text-anchor="middle" fill="#A5B4FC" font-size="9" letter-spacing="2">
+                CORE
+              </text>
+            </g>
+
+            <!-- 그라디언트 정의 -->
+            <defs>
+              <radialGradient id="coreGradient" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#4C6FFF" stop-opacity="0.9"/>
+                <stop offset="45%" stop-color="#1D2140" stop-opacity="0.95"/>
+                <stop offset="100%" stop-color="#020617" stop-opacity="1"/>
+              </radialGradient>
+            </defs>
+
+            <!-- ORDER CITY (상단) -->
+            <g class="map-region" data-engine="ORDER">
+              <rect x="150" y="40" rx="14" ry="14" width="100" height="60"
+                    fill="#111827" stroke="#4C6FFF" stroke-width="1.5" />
+              <text x="200" y="68" text-anchor="middle" fill="#E5E7EB" font-size="12" font-weight="600">
+                ORDER CITY
+              </text>
+              <text x="200" y="84" text-anchor="middle" fill="#A5B4FC" font-size="9">
+                ◆ 패턴 메가시티
+              </text>
+              <!-- 연결선 -->
+              <line x1="200" y1="100" x2="200" y2="154"
+                    stroke="#4C6FFF" stroke-width="1" stroke-dasharray="3 4" />
+            </g>
+
+            <!-- CREATION CITY (우측) -->
+            <g class="map-region" data-engine="CREATION">
+              <rect x="290" y="160" rx="14" ry="14" width="80" height="80"
+                    fill="#130825" stroke="#A855F7" stroke-width="1.5" />
+              <text x="330" y="193" text-anchor="middle" fill="#F9A8FF" font-size="11" font-weight="600">
+                CREATION
+              </text>
+              <text x="330" y="210" text-anchor="middle" fill="#E9D5FF" font-size="9">
+                ✦ 프로토타입 지구
+              </text>
+              <!-- 연결선 -->
+              <line x1="285" y1="200" x2="246" y2="200"
+                    stroke="#A855F7" stroke-width="1" stroke-dasharray="3 4" />
+            </g>
+
+            <!-- MEANING CITY (하단) -->
+            <g class="map-region" data-engine="MEANING">
+              <rect x="150" y="300" rx="14" ry="14" width="100" height="60"
+                    fill="#1F0920" stroke="#EC4899" stroke-width="1.5" />
+              <text x="200" y="328" text-anchor="middle" fill="#F9A8D4" font-size="11" font-weight="600">
+                MEANING CITY
+              </text>
+              <text x="200" y="344" text-anchor="middle" fill="#FB7185" font-size="9">
+                ❖ 내러티브 구역
+              </text>
+              <!-- 연결선 -->
+              <line x1="200" y1="296" x2="200" y2="246"
+                    stroke="#EC4899" stroke-width="1" stroke-dasharray="3 4" />
+            </g>
+
+            <!-- IMPACT CITY (좌측) -->
+            <g class="map-region" data-engine="IMPACT">
+              <rect x="30" y="160" rx="14" ry="14" width="80" height="80"
+                    fill="#1F0A05" stroke="#FB923C" stroke-width="1.5" />
+              <text x="70" y="192" text-anchor="middle" fill="#FED7AA" font-size="11" font-weight="600">
+                IMPACT
+              </text>
+              <text x="70" y="209" text-anchor="middle" fill="#FDBA74" font-size="9">
+                ▲ 작전 지구
+              </text>
+              <!-- 연결선 -->
+              <line x1="118" y1="200" x2="154" y2="200"
+                    stroke="#FB923C" stroke-width="1" stroke-dasharray="3 4" />
+            </g>
+          </svg>
+        </div>
+
+        <p class="mt-3 text-center text-[0.7rem] sm:text-xs text-indigo-300/70">
+          지도의 도시를 선택하면 아래 도시 정보와 추천 미션이 함께 전환돼
+        </p>
+      </div>
+    </section>
+
+    <!-- ENGINE SELECTOR (텍스트 버튼) -->
+    <section class="mb-8">
+      <div class="flex flex-wrap justify-center gap-3">
+        <button 
+          class="engine-chip flex items-center gap-2 px-4 py-2 rounded-full border border-indigo-500/60 text-xs sm:text-sm 
+                 bg-indigo-900/40 text-indigo-100 hover:bg-indigo-700/60 transition cursor-pointer"
+          data-engine="ORDER">
+          <span class="text-lg">◆</span>
+          <span class="font-semibold tracking-wide">ORDER CITY</span>
+        </button>
+
+        <button 
+          class="engine-chip flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/60 text-xs sm:text-sm 
+                 bg-purple-900/40 text-purple-100 hover:bg-purple-700/60 transition cursor-pointer"
+          data-engine="CREATION">
+          <span class="text-lg">✦</span>
+          <span class="font-semibold tracking-wide">CREATION CITY</span>
+        </button>
+
+        <button 
+          class="engine-chip flex items-center gap-2 px-4 py-2 rounded-full border border-pink-500/60 text-xs sm:text-sm 
+                 bg-pink-900/40 text-pink-100 hover:bg-pink-700/60 transition cursor-pointer"
+          data-engine="MEANING">
+          <span class="text-lg">❖</span>
+          <span class="font-semibold tracking-wide">MEANING CITY</span>
+        </button>
+
+        <button 
+          class="engine-chip flex items-center gap-2 px-4 py-2 rounded-full border border-orange-500/60 text-xs sm:text-sm 
+                 bg-orange-900/40 text-orange-100 hover:bg-orange-700/60 transition cursor-pointer"
+          data-engine="IMPACT">
+          <span class="text-lg">▲</span>
+          <span class="font-semibold tracking-wide">IMPACT CITY</span>
+        </button>
+      </div>
+
+      <p class="mt-3 text-center text-xs sm:text-sm text-indigo-300/70">
+        지도가 잘 안 눌리면 위 버튼으로도 도시를 바꿀 수 있어
+      </p>
+    </section>
+
+    <!-- MAIN CITY PANEL -->
+    <main id="cityPanel" class="page-enter bg-slate-900/50 border border-slate-700/70 rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
+
+      <!-- 상단 라벨 -->
+      <div class="flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-indigo-400 mb-4">
+        <span id="cityEngineCode">ORDER ENGINE</span>
+        <span class="w-px h-3 bg-indigo-500/60"></span>
+        <span id="cityTaglineLabel">CITY OF PATTERN & STRATEGY</span>
+      </div>
+
+      <!-- 심볼 + 타이틀 -->
+      <div class="flex flex-col sm:flex-row sm:items-start gap-6 mb-6">
+        <div class="flex-1">
+          <div class="flex items-center gap-3 mb-3">
+            <div id="citySymbol" class="text-4xl sm:text-5xl">◆</div>
+            <div class="text-left">
+              <h2 id="cityName" class="text-2xl sm:text-3xl font-bold text-indigo-100 tracking-tight">
+                ORDER CITY · 패턴 메가시티
+              </h2>
+              <p id="citySubtitle" class="text-sm text-indigo-200/80 mt-1">
+                구조와 전략이 도시의 언어가 되는 곳.
+              </p>
+            </div>
+          </div>
+
+          <!-- 키워드 태그 -->
+          <div id="cityKeywords" class="flex flex-wrap gap-2 mt-2 text-xs"></div>
+        </div>
+
+        <!-- 엔진 요약 카드 -->
+        <aside class="w-full sm:w-60 bg-slate-950/70 border border-slate-700/80 rounded-2xl p-4 text-xs sm:text-sm">
+          <p class="text-[0.65rem] uppercase tracking-[0.25em] text-indigo-400 mb-1">
+            WORLDVIEW ENGINE
+          </p>
+          <div id="miniEngineName" class="font-semibold text-indigo-100 mb-1">
+            ORDER · 질서 기반 해석 엔진
+          </div>
+          <p id="miniEngineDesc" class="text-indigo-200/80 leading-relaxed text-xs">
+            세계의 패턴과 규칙을 먼저 읽고, 혼란을 정렬하는 타입.
+          </p>
+        </aside>
+      </div>
+
+      <!-- 2단: 분위기 / 공간 / 플레이 -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mt-4">
+
+        <!-- 도시 설명 -->
+        <section class="lg:col-span-1 space-y-4">
+          <div>
+            <h3 class="text-sm font-semibold text-indigo-200 mb-1">도시 분위기</h3>
+            <p id="cityMood" class="text-sm text-indigo-100/80 leading-relaxed"></p>
+          </div>
+
+          <div>
+            <h3 class="text-sm font-semibold text-indigo-200 mb-1">이런 사람에게 홈 베이스</h3>
+            <p id="cityForWhom" class="text-sm text-indigo-100/80 leading-relaxed"></p>
+          </div>
+        </section>
+
+        <!-- 대표 공간 -->
+        <section class="lg:col-span-1 bg-slate-950/60 border border-slate-700/70 rounded-2xl p-4">
+          <h3 class="text-sm font-semibold text-indigo-200 mb-3">대표 공간</h3>
+          <ul id="cityPlaces" class="space-y-2 text-sm text-indigo-100/85"></ul>
+        </section>
+
+        <!-- 추천 플레이 -->
+        <section class="lg:col-span-1 bg-slate-950/60 border border-slate-700/70 rounded-2xl p-4">
+          <h3 class="text-sm font-semibold text-indigo-200 mb-3">추천 플레이 타입</h3>
+          <ul id="cityPlays" class="space-y-2 text-sm text-indigo-100/85"></ul>
+        </section>
+      </div>
+
+      <!-- 추천 미션 카드 리스트 -->
+      <section class="mt-10">
+        <h3 class="text-lg font-bold text-indigo-200 mb-4">추천 미션</h3>
+        <div id="cityMissions" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <!-- JS 생성 -->
+        </div>
+      </section>
+
+      <!-- 하단 노트 -->
+      <div class="mt-8 pt-5 border-t border-slate-700/60 text-[0.7rem] sm:text-xs text-indigo-300/70 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+        <p id="cityFootnote">
+          이 도시는 WORLDPLAY 내에서 너의 세계관 엔진이 가장 편하게 숨 쉴 수 있는 기본 필드야.
+        </p>
+      </div>
+    </main>
+
+    <!-- BACK LINK -->
+    <div class="mt-10 text-center">
+      <a href="index.html" class="text-indigo-300 underline underline-offset-4 hover:text-indigo-100 text-xs sm:text-sm">
+        세계관 코어 테스트로 돌아가기
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    /* ========================
+       엔진별 도시 + 미션 데이터
+    ======================== */
+    const CITY_DATA = {
+      ORDER: {
+        engineCode: "ORDER ENGINE",
+        symbol: "◆",
+        name: "ORDER CITY · 패턴 메가시티",
+        subtitle: "구조와 전략이 도시의 언어가 되는 곳.",
+        tagline: "CITY OF PATTERN & STRATEGY",
+        color: "#4C6FFF",
+        keywords: ["전략 허브", "패턴 분석", "도시 기지국"],
+        engineName: "ORDER · 질서 기반 해석 엔진",
+        engineDesc: "세계의 패턴과 규칙을 먼저 읽고, 혼란을 정렬하는 타입.",
+        mood: "네온빛 격자 도로와 메가타워가 이어진 도시. 모든 사물은 하나의 시스템 위에 놓여 있다.",
+        forWhom: "흐트러진 상황을 보면 자동으로 정리하고 싶은 사람.",
+        places: [
+          "패턴 타워 (Pattern Tower)",
+          "도시 지휘본부 (Order HQ)",
+          "증거 보관소 (Logos Archive)"
+        ],
+        plays: [
+          "논리·추리 방탈출",
+          "단서 정렬 기반 미션",
+          "장기 전략·전술 중심 미션"
+        ],
+        footnote: "ORDER CITY는 퍼즐·전략 중심 콘텐츠의 허브야.",
+        missions: [
+          {
+            title: "네온 퍼즐 아카이브",
+            desc: "흩어진 기록과 단서들을 조합해 ‘패턴 코드’를 해독하는 미션.",
+            thumbnail: "https://placehold.co/400x260/4C6FFF/FFFFFF?text=ORDER+MISSION",
+            tags: ["퍼즐", "단서조합", "추리"],
+            link: "https://your-notion-page.com"
+          },
+          {
+            title: "도시 지휘본부 침투 작전",
+            desc: "사령실의 패턴 보안 시스템을 해제하고 내부 구조를 파악하라.",
+            thumbnail: "https://placehold.co/400x260/334AFF/FFFFFF?text=HQ+MISSION",
+            tags: ["전략", "보안해제", "지휘"],
+            link: "https://your-notion-page.com"
+          },
+          {
+            title: "로고스 데이터베이스",
+            desc: "증거 보관소에서 ‘진짜 단서’만 골라내 구조를 재구성하는 미션.",
+            thumbnail: "https://placehold.co/400x260/233ACC/FFFFFF?text=ARCHIVE",
+            tags: ["증거분석", "패턴정렬"],
+            link: "https://your-notion-page.com"
+          }
+        ]
+      },
+
+      CREATION: {
+        engineCode: "CREATION ENGINE",
+        symbol: "✦",
+        name: "CREATION CITY · 프로토타입 지구",
+        subtitle: "정답보다 새로운 방식이 먼저 나오는 구역.",
+        tagline: "CITY OF EXPERIMENT & POSSIBILITY",
+        color: "#A855F7",
+        keywords: ["실험 지구", "프로토타입", "아이디어 폭발"],
+        engineName: "CREATION · 창조 기반 확장 엔진",
+        engineDesc: "정해진 틀 밖에서 새로운 조합을 만드는 타입.",
+        mood: "기묘한 장치들과 반쯤 완성된 구조물이 서 있는 실험 구역.",
+        forWhom: "정형화된 방식보다 실험과 창작을 더 좋아하는 사람.",
+        places: [
+          "아이디어 공방 (Lab Atelier)",
+          "프로토타입 존",
+          "변칙 시장 (Glitch Market)"
+        ],
+        plays: [
+          "오픈형 탐험",
+          "조합·창작 미션",
+          "규칙을 비트는 변칙 플레이"
+        ],
+        footnote: "CREATION CITY는 실험형 콘텐츠와 잘 맞아.",
+        missions: [
+          {
+            title: "프로토타입 실험실",
+            desc: "버려진 장치와 오브젝트들을 조합해 ‘새 기믹’을 직접 만든다.",
+            thumbnail: "https://placehold.co/400x260/A855F7/FFFFFF?text=CREATION",
+            tags: ["창작", "조합", "실험"],
+            link: "https://your-notion-page.com"
+          },
+          {
+            title: "변칙 시장 투어",
+            desc: "규칙이 계속 바뀌는 시장을 돌아다니며 기묘한 물건을 활용해 미션을 해결한다.",
+            thumbnail: "https://placehold.co/400x260/8F3FD0/FFFFFF?text=GLITCH",
+            tags: ["탐험", "상호작용"],
+            link: "https://your-notion-page.com"
+          },
+          {
+            title: "상상력 조합 테스트",
+            desc: "기존의 규칙을 해체하고 ‘너만의 해결법’을 찾아내는 창작형 미션.",
+            thumbnail: "https://placehold.co/400x260/7423B0/FFFFFF?text=IDEA",
+            tags: ["발상전환", "실험"],
+            link: "https://your-notion-page.com"
+          }
+        ]
+      },
+
+      MEANING: {
+        engineCode: "MEANING ENGINE",
+        symbol: "❖",
+        name: "MEANING CITY · 내러티브 구역",
+        subtitle: "감정과 관계, 이야기의 밀도가 높은 도시.",
+        tagline: "CITY OF STORY & EMOTION",
+        color: "#EC4899",
+        keywords: ["서사 밀도", "감정 골목", "상징 레이어"],
+        engineName: "MEANING · 의미 중심 내면 엔진",
+        engineDesc: "표면 아래의 감정과 맥락을 먼저 읽는 타입.",
+        mood: "골목마다 ‘감정의 기류’가 흐르고, 건물마다 이야기가 깃들어 있다.",
+        forWhom: "스토리·관계·감정에 깊이 빠지는 사람에게 가장 편한 도시.",
+        places: [
+          "스토리 극장 (The Mosaic)",
+          "기억의 정원 (Garden of Echoes)",
+          "상징 도서관 (Symbolion)"
+        ],
+        plays: [
+          "스토리 이머시브",
+          "관계형 미션",
+          "감정 기반 추리"
+        ],
+        footnote: "MEANING CITY는 이머시브 연극·감정형 투어와 잘 맞아.",
+        missions: [
+          {
+            title: "감정의 정원 산책",
+            desc: "과거의 장면이 재생되는 공간에서 숨겨진 감정 단서를 찾아 연결한다.",
+            thumbnail: "https://placehold.co/400x260/EC4899/FFFFFF?text=MEANING",
+            tags: ["감정탐색", "스토리"],
+            link: "https://your-notion-page.com"
+          },
+          {
+            title: "상징 도서관 사건",
+            desc: "대사·상징·기류를 해석해 숨겨진 이야기를 복원하는 서사형 미션.",
+            thumbnail: "https://placehold.co/400x260/CC2E80/FFFFFF?text=SYMBOL",
+            tags: ["서사", "해석"],
+            link: "https://your-notion-page.com"
+          },
+          {
+            title: "캐릭터 라인 추적",
+            desc: "NPC의 행동·말투·관계를 분석하여 이야기의 진실을 파헤친다.",
+            thumbnail: "https://placehold.co/400x260/B91C6F/FFFFFF?text=CHARACTER",
+            tags: ["인물", "관계"],
+            link: "https://your-notion-page.com"
+          }
+        ]
+      },
+
+      IMPACT: {
+        engineCode: "IMPACT ENGINE",
+        symbol: "▲",
+        name: "IMPACT CITY · 작전 지구",
+        subtitle: "속도와 실행이 모든 것을 결정하는 전장.",
+        tagline: "CITY OF ACTION & DECISION",
+        color: "#FB923C",
+        keywords: ["작전 구역", "타임어택", "현장 오퍼레이션"],
+        engineName: "IMPACT · 영향 기반 실행 엔진",
+        engineDesc: "“결국 무엇이 달라졌는가?”를 가장 먼저 보는 타입.",
+        mood: "경보음·카운트다운·작전 브리핑이 이어지는 긴장감 높은 도시.",
+        forWhom: "위기에서 더 집중되고, 행동으로 해결하는 타입.",
+        places: [
+          "전술 작전본부 (Impact HQ)",
+          "타임러너 레인 (Time Runner Lane)",
+          "필드 오퍼레이션 존 (Field Ops)"
+        ],
+        plays: [
+          "타임어택 미션",
+          "필드 액션",
+          "위기 대응"
+        ],
+        footnote: "IMPACT CITY는 레이스·필드 미션과 가장 잘 맞아.",
+        missions: [
+          {
+            title: "카운트다운 작전",
+            desc: "남은 시간 안에 목표를 달성해야 하는 타임어택 실전 미션.",
+            thumbnail: "https://placehold.co/400x260/FB923C/FFFFFF?text=IMPACT",
+            tags: ["시간제한", "액션"],
+            link: "https://your-notion-page.com"
+          },
+          {
+            title: "도시 필드 추격전",
+            desc: "지정된 구역을 뛰며 단서를 확보하고 목표 지점을 탈환하라.",
+            thumbnail: "https://placehold.co/400x260/D96F20/FFFFFF?text=CHASE",
+            tags: ["추격", "현장"],
+            link: "https://your-notion-page.com"
+          },
+          {
+            title: "위기대응 팀플",
+            desc: "즉각적인 판단으로 미션을 해결하는 실전형 팀 액션.",
+            thumbnail: "https://placehold.co/400x260/C85D0F/FFFFFF?text=OPS",
+            tags: ["팀액션", "결단"],
+            link: "https://your-notion-page.com"
+          }
+        ]
+      }
+    };
+
+    /* ========================
+       DOM 요소
+    ======================== */
+    const cityPanel   = document.getElementById("cityPanel");
+    const engineCode  = document.getElementById("cityEngineCode");
+    const tagline     = document.getElementById("cityTaglineLabel");
+    const symbolEl    = document.getElementById("citySymbol");
+    const nameEl      = document.getElementById("cityName");
+    const subtitleEl  = document.getElementById("citySubtitle");
+    const keywordsBox = document.getElementById("cityKeywords");
+    const miniName    = document.getElementById("miniEngineName");
+    const miniDesc    = document.getElementById("miniEngineDesc");
+    const moodEl      = document.getElementById("cityMood");
+    const forWhomEl   = document.getElementById("cityForWhom");
+    const placesEl    = document.getElementById("cityPlaces");
+    const playsEl     = document.getElementById("cityPlays");
+    const missionsEl  = document.getElementById("cityMissions");
+    const footnoteEl  = document.getElementById("cityFootnote");
+
+    const engineChips = document.querySelectorAll(".engine-chip");
+    const mapRegions  = document.querySelectorAll(".map-region");
+
+    /* ========================
+       도시 렌더링 함수
+    ======================== */
+    function renderCity(engineKey) {
+      const data = CITY_DATA[engineKey];
+      if (!data) return;
+
+      // 진입 애니메이션
+      cityPanel.classList.remove("page-enter-active");
+      void cityPanel.offsetWidth;
+      cityPanel.classList.add("page-enter-active");
+
+      engineCode.textContent = data.engineCode;
+      tagline.textContent    = data.tagline;
+      symbolEl.textContent   = data.symbol;
+      nameEl.textContent     = data.name;
+      subtitleEl.textContent = data.subtitle;
+
+      miniName.textContent   = data.engineName;
+      miniDesc.textContent   = data.engineDesc;
+
+      moodEl.textContent     = data.mood;
+      forWhomEl.textContent  = data.forWhom;
+      footnoteEl.textContent = data.footnote;
+
+      /* 키워드 */
+      keywordsBox.innerHTML = "";
+      data.keywords.forEach(kw => {
+        const span = document.createElement("span");
+        span.className = "px-2.5 py-1 rounded-full bg-slate-800/80 border border-slate-600/70 text-[0.7rem]";
+        span.textContent = kw;
+        keywordsBox.appendChild(span);
+      });
+
+      /* 대표 공간 */
+      placesEl.innerHTML = "";
+      data.places.forEach(text => {
+        const li = document.createElement("li");
+        li.textContent = text;
+        placesEl.appendChild(li);
+      });
+
+      /* 추천 플레이 */
+      playsEl.innerHTML = "";
+      data.plays.forEach(text => {
+        const li = document.createElement("li");
+        li.textContent = text;
+        playsEl.appendChild(li);
+      });
+
+      /* 추천 미션 카드 */
+      missionsEl.innerHTML = "";
+      data.missions.forEach(mis => {
+        const card = document.createElement("div");
+        card.className =
+          "bg-slate-950/70 border border-slate-700/60 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition";
+        card.innerHTML = `
+          <img src="${mis.thumbnail}" class="w-full h-36 object-cover opacity-90">
+          <div class="p-4">
+            <h4 class="font-bold text-indigo-100 text-sm mb-1">${mis.title}</h4>
+            <div class="flex flex-wrap gap-1 mb-2">
+              ${mis.tags
+                .map(t => `<span class="text-[0.65rem] px-2 py-0.5 rounded-full bg-slate-800/70 border border-slate-600/60">${t}</span>`)
+                .join("")}
+            </div>
+            <p class="text-xs text-indigo-200/80 leading-relaxed mb-3">${mis.desc}</p>
+            <a href="${mis.link}" target="_blank" class="text-indigo-400 text-xs font-semibold underline underline-offset-2">
+              체험하기 →
+            </a>
+          </div>
+        `;
+        missionsEl.appendChild(card);
+      });
+
+      /* 색감 반영 */
+      cityPanel.style.boxShadow = `0 0 30px ${data.color}35`;
+      engineCode.style.color = data.color;
+      symbolEl.style.color = data.color;
+
+      /* SVG 맵 활성화 표시 */
+      mapRegions.forEach(r => r.classList.remove("map-region-active"));
+      const activeRegion = document.querySelector(`.map-region[data-engine="${engineKey}"]`);
+      if (activeRegion) activeRegion.classList.add("map-region-active");
+
+      /* 텍스트 칩 활성화 표시 */
+      engineChips.forEach(c => {
+        if (c.getAttribute("data-engine") === engineKey) c.classList.add("engine-chip-active");
+        else c.classList.remove("engine-chip-active");
+      });
+    }
+
+    /* 엔진 버튼 클릭 */
+    engineChips.forEach(chip => {
+      chip.addEventListener("click", () => {
+        const engine = chip.getAttribute("data-engine");
+        renderCity(engine);
+      });
+    });
+
+    /* SVG 맵 도시 클릭 */
+    mapRegions.forEach(region => {
+      region.addEventListener("click", () => {
+        const engine = region.getAttribute("data-engine");
+        renderCity(engine);
+      });
+    });
+
+    /* 초기 진입: ORDER CITY */
+    window.addEventListener("DOMContentLoaded", () => {
+      renderCity("ORDER");
+    });
+  </script>
+
+</body>
+</html>
